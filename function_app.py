@@ -43,15 +43,17 @@ def document_image_procesing(myblob: func.InputStream):
     stream = io.BytesIO()
     
     random_foldername = str(uuid.uuid4())
-    temp_path = os.getenv('TMPDIR', os.path.join('.','tmp'))
+    temp_path = os.getenv('TMPDIR', os.path.join('/','tmp'))
     temp_path = os.path.join(temp_path, random_foldername)
+
+    logging.warn(f"Temp path: {temp_path}")
 
     create_folder(temp_path)
     create_folder(temp_path, AZURE_STORAGE_CONTAINER_NAME_INPUT)
     create_folder(temp_path, AZURE_STORAGE_CONTAINER_NAME_IMAGES)
     create_folder(temp_path, AZURE_STORAGE_CONTAINER_NAME_DOCS)
 
-    logging.info(f"Temp path: {temp_path}")
+    # logging.info(f"Temp path: {temp_path}")
 
     # generate random filename
     random_filename = myblob.name
